@@ -14,7 +14,9 @@ html, body {
   width: 100%;
   height: 100%;
   font-family: 'Poppins', sans-serif;
-  overflow: hidden;
+  /* Fixed: Changed hidden to auto so she can scroll on her phone */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* 🔥 HAND PIC AS BACKGROUND */
@@ -24,6 +26,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  min-height: 100vh;
 }
 
 /* Dark overlay for readability */
@@ -37,10 +40,10 @@ body::before {
 
 .container {
   width: 100%;
-  height: 100%;
   text-align: center;
   color: #fff;
   padding: 20px;
+  padding-bottom: 60px; /* Added space at the bottom */
   box-sizing: border-box;
   position: relative;
   z-index: 2;
@@ -71,13 +74,14 @@ button:hover { transform: scale(1.08); }
 }
 
 .music-toggle {
-  position: absolute;
+  position: fixed; /* Keep it visible while scrolling */
   top: 20px;
   right: 20px;
   background: rgba(255,255,255,.25);
   border-radius: 20px;
   padding: 8px 14px;
   color: #fff;
+  z-index: 10;
 }
 
 /* Password */
@@ -93,7 +97,7 @@ input {
 
 /* Floating hearts */
 .heart {
-  position: absolute;
+  position: fixed; /* Keep hearts floating on screen while scrolling */
   width: 20px;
   height: 20px;
   background: red;
@@ -211,6 +215,7 @@ input {
 const PASSWORD = "14july";
 let musicOn = false;
 
+// RESTORED: Your original letter text exactly as provided
 const letterText = `baccha mai efforts kr sakta hu prayer kar sakta hu aur mujhe pata hai kahi na kahi you still love a part of me.
  mera baccha bas ek baar aa jao, i just want us to never give up on each other, i may annoy you and  have made mistake but losing 
 you has shown me how my life can be without us being together forever, baccha despite all ups and downs  want to be the man who 
@@ -274,6 +279,8 @@ function typeWriter() {
 
 function revealPhoto() {
   photoBox.classList.add("show");
+  // Simple scroll to reveal the photo once clicked
+  window.scrollBy({ top: 300, behavior: 'smooth' });
 }
 
 function createHearts() {
