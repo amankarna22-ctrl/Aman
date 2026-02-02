@@ -3,248 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aman ❤️ Awantika - Valentine Quiz</title>
-
+<title>Aman ❤️ Awantika</title>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-}
-
-/* 🔥 HAND PIC AS BACKGROUND */
-body {
-  background: url("hands.jpg") center/cover no-repeat fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-/* Dark overlay for readability */
-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  z-index: 1;
-}
-
-.container {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  color: #fff;
-  padding: 20px;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 2;
-}
-
-.hidden { display: none; }
-
-h1, h2 { font-family: 'Pacifico', cursive; }
-
-button {
-  padding: 14px 28px;
-  border: none;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #ff5f6d, #ffc371);
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.2s;
-  box-shadow: 0 6px 15px rgba(0,0,0,.3);
-}
-
-button:hover { transform: scale(1.08); }
-
-.options {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.music-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255,255,255,.25);
-  border-radius: 20px;
-  padding: 8px 14px;
-  color: #fff;
-}
-
-/* Password */
-input {
-  padding: 12px;
-  border-radius: 20px;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-/* Floating hearts */
-.heart {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: red;
-  transform: rotate(45deg);
-  animation: float 8s linear infinite;
-  z-index: 1;
-}
-
-.heart::before,
-.heart::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: red;
-  border-radius: 50%;
-}
-
-.heart::before { top: -10px; }
-.heart::after { left: -10px; }
-
-@keyframes float {
-  from { transform: translateY(100vh) rotate(45deg); opacity: 1; }
-  to { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
-}
-
-/* PHOTO REVEAL */
-.photo-box {
-  margin-top: 25px;
-  opacity: 0;
-  transform: scale(0.85);
-  transition: 1.2s ease;
-}
-
-.photo-box img {
-  width: 280px;
-  max-width: 90%;
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0,0,0,.5);
-}
-
-.photo-box.show {
-  opacity: 1;
-  transform: scale(1);
-}
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    font-family: 'Poppins', sans-serif; overflow: hidden;
+  }
+  body {
+    background: #1a1a1a; 
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  /* The overlay to make text pop */
+  body::before {
+    content: ""; position: absolute; inset: 0;
+    background: rgba(0,0,0,0.6); z-index: 1;
+  }
+  .container {
+    width: 90%; max-width: 450px; height: 80vh;
+    text-align: center; color: #fff; padding: 25px;
+    box-sizing: border-box; position: relative; z-index: 10;
+    background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px);
+    border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex; flex-direction: column; justify-content: center;
+    overflow-y: auto;
+  }
+  .hidden { display: none !important; }
+  h1, h2 { font-family: 'Pacifico', cursive; color: #ff85a1; margin-bottom: 10px; }
+  button {
+    padding: 12px 24px; border: none; border-radius: 30px;
+    background: linear-gradient(135deg, #ff5f6d, #ffc371);
+    color: #fff; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: 0.3s; margin: 8px auto; width: 85%;
+  }
+  button:hover { transform: scale(1.05); }
+  input {
+    padding: 12px; border-radius: 20px; border: 2px solid #ff5f6d;
+    outline: none; font-size: 1rem; margin-bottom: 15px; text-align: center;
+  }
+  .heart {
+    position: absolute; bottom: -10%; color: rgba(255, 50, 50, 0.7);
+    font-size: 20px; user-select: none; pointer-events: none;
+    z-index: 2; animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+  }
+  #letter {
+    font-size: 0.9rem; line-height: 1.6; text-align: left;
+    max-height: 250px; overflow-y: auto; padding: 10px;
+    background: rgba(0,0,0,0.2); border-radius: 15px; margin-bottom: 15px;
+  }
+  .photo-box { margin-top: 15px; display: none; animation: fadeIn 2s ease forwards; }
+  .photo-box img {
+    width: 100%; border-radius: 15px; border: 4px solid white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .music-btn {
+    position: fixed; top: 15px; right: 15px; z-index: 100;
+    width: auto; padding: 8px 15px; font-size: 0.7rem; background: rgba(0,0,0,0.5);
+  }
 </style>
 </head>
-
 <body>
 
+<button class="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
+
 <div class="container">
+  <div id="lock">
+    <h1>For Awantika 💖</h1>
+    <p>Enter the secret word</p>
+    <input type="password" id="password" placeholder="Hint: 14july">
+    <br>
+    <button onclick="checkPassword()">Unlock 💌</button>
+    <p id="error" style="color:#ffdede; font-size: 0.8rem;"></p>
+  </div>
 
-<button class="music-toggle" onclick="toggleMusic()">🔊 Music</button>
+  <div class="hidden" id="intro">
+    <h1>Hey Awantika 💖</h1>
+    <p>Aman has a message for you...</p>
+    <button onclick="startQuiz()">Open it 💕</button>
+  </div>
 
-<!-- PASSWORD -->
-<div id="lock">
-  <h1>For Awantika 💖</h1>
-  <p>Enter the secret word</p>
-  <input type="password" id="password" placeholder="💗">
-  <br>
-  <button onclick="checkPassword()">Unlock 💌</button>
-  <p id="error" style="color:#ffdede;"></p>
-</div>
-
-<!-- INTRO -->
-<div class="hidden" id="intro">
-  <h1>Hey Awantika 💖</h1>
-  <p>Aman has something special for you…</p>
-  <button onclick="startQuiz()">Start 💕</button>
-</div>
-
-<!-- QUESTIONS -->
-<div class="hidden" id="q1">
-  <h2>Do you love Aman?</h2>
-  <div class="options">
+  <div class="hidden" id="q1">
+    <h2>Do you love Aman?</h2>
     <button onclick="next('q2')">Yes 😘</button>
-    <button onclick="next('q2')">Of course ❤️</button>
     <button onclick="next('q2')">More than anything 💞</button>
   </div>
-</div>
 
-<div class="hidden" id="q2">
-  <h2>Will you be my Valentine?</h2>
-  <div class="options">
-    <button onclick="next('q3')">Yes 💐</button>
-    <button onclick="next('q3')">Always 😍</button>
-    <button onclick="next('q3')">Forever yours 💍</button>
+  <div class="hidden" id="q2">
+    <h2>Will you be my Valentine?</h2>
+    <button onclick="next('final')">Always 😍</button>
+    <button onclick="next('final')">Forever yours 💍</button>
   </div>
-</div>
 
-<div class="hidden" id="q3">
-  <h2>How much do you love me?</h2>
-  <div class="options">
-    <button onclick="next('final')">Infinity ♾️</button>
-    <button onclick="next('final')">More than infinity 💖</button>
-    <button onclick="next('final')">My whole heart 💗</button>
+  <div class="hidden" id="final">
+    <h2>I love you baccha 💕</h2>
+    <div id="letter"></div>
+    <button id="revealBtn" class="hidden" onclick="revealPhoto()">Our Memory 📸</button>
+    <div class="photo-box" id="photoBox">
+      <img src="https://api.artguru.ai/api/v1/user/file/2026/02/02/02/525301842857140224.jpg" alt="Us">
+      <p style="font-family: 'Pacifico'; margin-top: 10px;">Forever & Always</p>
+    </div>
   </div>
-</div>
-
-<!-- FINAL -->
-<div class="hidden" id="final">
-  <h2>I love you baccha 💕</h2>
-  <p id="letter"></p>
-
-  <button id="revealBtn" class="hidden" onclick="revealPhoto(us.jpg)">Reveal Our Memory 💖</button>
-
-  <!-- 💑 COUPLE PIC HERE -->
-  <div class="photo-box" id="photoBox">
-    <img src="us.jpg" alt="Our Memory">
-  </div>
-</div>
-
 </div>
 
 <audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+  <source src="http://googleusercontent.com/file_content/0" type="audio/mpeg">
 </audio>
 
 <script>
 const PASSWORD = "14july";
 let musicOn = false;
-
-const letterText = `hey baccha i just want us to never give up on each other, yes i may annoy you, and i have made mistakes but i have 
-learnt from that mistake what i have lost in my life ,but bacha loving you was never a mistake. 
-trust me mera baccha bas ek baar aa jao... we are gonna love each other always, i don't wanna lose what is there between us let's build
-the life we always planned together, sach mein baccha let's give love a chance , i want to be by your side always despite all ups and downs. i will always love you forever.
-tum mere prathna ka vardan bano aur tumko paa kar mai ek aacha insaan ban jau, because you are everything to me come home soon baby.
-I miss you baccha... will you be my little Valentine, butkun bacha? 💐
-
-— Yours always, bebu doll orange cat ❤️`;
+const letterText = `hey baccha, I just want us to never give up on each other. Yes, I may annoy you, and I have made mistakes, but I have learnt from those mistakes. Loving you was never a mistake. Trust me, mera baccha, bas ek baar aa jao... we are gonna love each other always. I don't wanna lose what is there between us. Let's build the life we always planned together. Sach mein baccha, let's give love a chance. I want to be by your side always despite all ups and downs. I will always love you forever. Tum mere prathna ka vardan bano aur tumko paa kar mai ek aacha insaan ban jau, because you are everything to me. Come home soon baby. I miss you baccha... will you be my little Valentine, butkun bacha? 💐 — Yours always, bebu doll orange cat ❤️`;
 
 function toggleMusic() {
   const m = document.getElementById('bgMusic');
-  musicOn ? m.pause() : m.play();
+  if (musicOn) { m.pause(); } else { m.play(); }
   musicOn = !musicOn;
 }
 
 function checkPassword() {
-  const input = document.getElementById('password').value;
-  if (input.toLowerCase() === PASSWORD) {
-    lock.classList.add('hidden');
-    intro.classList.remove('hidden');
+  if (document.getElementById('password').value.toLowerCase() === PASSWORD) {
+    document.getElementById('lock').classList.add('hidden');
+    document.getElementById('intro').classList.remove('hidden');
   } else {
-    error.innerText = "Wrong word… but love is close 💔";
+    document.getElementById('error').innerText = "Wrong word... try 14july";
   }
 }
 
-function startQuiz() {
-  hideAll();
-  q1.classList.remove('hidden');
-}
+function startQuiz() { hideAll(); document.getElementById('q1').classList.remove('hidden'); }
 
 function next(id) {
   hideAll();
@@ -252,44 +142,35 @@ function next(id) {
   if (id === "final") typeWriter();
 }
 
-function hideAll() {
-  document.querySelectorAll('#intro,#q1,#q2,#q3,#final')
-    .forEach(el => el.classList.add('hidden'));
-}
+function hideAll() { document.querySelectorAll('#lock, #intro, #q1, #q2, #final').forEach(el => el.classList.add('hidden')); }
 
 function typeWriter() {
   const el = document.getElementById("letter");
-  const btn = document.getElementById("revealBtn");
-  el.innerHTML = "";
-  btn.classList.add("hidden");
   let i = 0;
-
   function write() {
     if (i < letterText.length) {
-      el.innerHTML += letterText.charAt(i) === "\n" ? "<br><br>" : letterText.charAt(i);
-      i++;
-      setTimeout(write, 35);
-    } else {
-      btn.classList.remove("hidden");
-    }
+      el.innerHTML += letterText.charAt(i);
+      i++; el.scrollTop = el.scrollHeight;
+      setTimeout(write, 40);
+    } else { document.getElementById("revealBtn").classList.remove("hidden"); }
   }
   write();
 }
 
 function revealPhoto() {
-  photoBox.classList.add("us.jpg");
+  document.getElementById('photoBox').style.display = 'block';
+  document.getElementById('revealBtn').classList.add('hidden');
 }
 
 function createHearts() {
   const heart = document.createElement('div');
-  heart.className = 'heart';
+  heart.className = 'heart'; heart.innerHTML = '❤️';
   heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+  heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
   document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 8000);
+  setTimeout(() => heart.remove(), 6000);
 }
-setInterval(createHearts, 500);
+setInterval(createHearts, 400);
 </script>
-
 </body>
 </html>
