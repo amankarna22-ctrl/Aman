@@ -3,294 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aman ❤️ Awantika - Valentine Quiz</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Rose Day Scanner 🌹</title>
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
-/* 🔥 HAND PIC AS BACKGROUND */
-body {
-  background: url("hands.jpg") center/cover no-repeat fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#ff4e50,#f9d423);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 
-/* Dark overlay for readability */
-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  z-index: 1;
+.scanner{
+  width:320px;
+  height:460px;
+  background:rgba(0,0,0,0.65);
+  border-radius:22px;
+  box-shadow:0 0 40px rgba(255,0,80,.7);
+  color:#fff;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
 }
 
-.container {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  color: #fff;
-  padding: 20px;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 2;
+.title{
+  padding:14px;
+  font-size:1.2rem;
+  color:#ffb3c1;
 }
 
-.hidden { display: none; }
-
-h1, h2 { font-family: 'Pacifico', cursive; }
-
-button {
-  padding: 14px 28px;
-  border: none;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #ff5f6d, #ffc371);
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.2s;
-  box-shadow: 0 6px 15px rgba(0,0,0,.3);
+.scan-area{
+  height:260px;
+  margin:10px;
+  border-radius:16px;
+  background:#000;
+  position:relative;
+  overflow:hidden;
 }
 
-button:hover { transform: scale(1.08); }
-
-.options {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.scan-line{
+  position:absolute;
+  width:100%;
+  height:4px;
+  background:linear-gradient(90deg,transparent,#ff004f,transparent);
+  animation:scan 3s linear infinite;
 }
 
-.music-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255,255,255,.25);
-  border-radius: 20px;
-  padding: 8px 14px;
-  color: #fff;
+@keyframes scan{
+  from{top:-20px}
+  to{top:280px}
 }
 
-/* Password */
-input {
-  padding: 12px;
-  border-radius: 20px;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  margin-bottom: 15px;
-  text-align: center;
+.status{
+  font-size:.9rem;
+  margin-top:6px;
+  opacity:.9;
 }
 
-/* Floating hearts */
-.heart {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: red;
-  transform: rotate(45deg);
-  animation: float 8s linear infinite;
-  z-index: 1;
+.result,
+.letter{
+  display:none;
+  padding:12px;
 }
 
-.heart::before,
-.heart::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: red;
-  border-radius: 50%;
+.result img{
+  width:160px;
+  border-radius:14px;
+  margin-top:10px;
+  box-shadow:0 0 25px rgba(255,0,80,.9);
 }
 
-.heart::before { top: -10px; }
-.heart::after { left: -10px; }
-
-@keyframes float {
-  from { transform: translateY(100vh) rotate(45deg); opacity: 1; }
-  to { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+.letter{
+  font-size:.85rem;
+  line-height:1.6;
+  color:#ffdede;
+  text-shadow:0 0 10px rgba(255,150,150,.4);
 }
 
-/* PHOTO REVEAL */
-.photo-box {
-  margin-top: 25px;
-  opacity: 0;
-  transform: scale(0.85);
-  transition: 1.2s ease;
+.heart{
+  position:absolute;
+  bottom:-20px;
+  font-size:18px;
+  animation:float 4s linear infinite;
 }
 
-.photo-box img {
-  width: 280px;
-  max-width: 90%;
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0,0,0,.5);
-}
-
-.photo-box.show {
-  opacity: 1;
-  transform: scale(1);
+@keyframes float{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-520px);opacity:0}
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="scanner">
+  <div class="title">🌹 Rose Day Scanner 🌹</div>
 
-<button class="music-toggle" onclick="toggleMusic()">🔊 Music</button>
-
-<!-- PASSWORD -->
-<div id="lock">
-  <h1>For Awantika 💖</h1>
-  <p>Enter the secret word</p>
-  <input type="password" id="password" placeholder="💗">
-  <br>
-  <button onclick="checkPassword()">Unlock 💌</button>
-  <p id="error" style="color:#ffdede;"></p>
-</div>
-
-<!-- INTRO -->
-<div class="hidden" id="intro">
-  <h1>Hey Awantika 💖</h1>
-  <p>Aman has something special for you…</p>
-  <button onclick="startQuiz()">Start 💕</button>
-</div>
-
-<!-- QUESTIONS -->
-<div class="hidden" id="q1">
-  <h2>Do you love Aman?</h2>
-  <div class="options">
-    <button onclick="next('q2')">Yes 😘</button>
-    <button onclick="next('q2')">Of course ❤️</button>
-    <button onclick="next('q2')">More than anything 💞</button>
+  <div class="scan-area">
+    <div class="scan-line"></div>
   </div>
-</div>
 
-<div class="hidden" id="q2">
-  <h2>Will you be my Valentine?</h2>
-  <div class="options">
-    <button onclick="next('q3')">Yes 💐</button>
-    <button onclick="next('q3')">Always 😍</button>
-    <button onclick="next('q3')">Forever yours 💍</button>
+  <div class="status" id="status">Reading heartbeat… ❤️</div>
+
+  <div class="result" id="result">
+    <h3>💘 Match Found 💘</h3>
+    <p>Awantika 🌹</p>
+    <!-- optional image -->
+    <!-- <img src="us.jpg" alt="Valentine"> -->
   </div>
+
+  <div class="letter" id="letter"></div>
 </div>
-
-<div class="hidden" id="q3">
-  <h2>How much do you love me?</h2>
-  <div class="options">
-    <button onclick="next('final')">Infinity ♾️</button>
-    <button onclick="next('final')">More than infinity 💖</button>
-    <button onclick="next('final')">My whole heart 💗</button>
-  </div>
-</div>
-
-<!-- FINAL -->
-<div class="hidden" id="final">
-  <h2>I love you baccha 💕</h2>
-  <p id="letter"></p>
-
-  <button id="revealBtn" class="hidden" onclick="revealPhoto()">Reveal Our Memory 💖</button>
-
-  <!-- 💑 COUPLE PIC HERE -->
-  <div class="photo-box" id="photoBox">
-    <img src="us.jpg" alt="Our Memory">
-  </div>
-</div>
-
-</div>
-
-<audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-</audio>
 
 <script>
-const PASSWORD = "14july";
-let musicOn = false;
+const status = document.getElementById("status");
+const result = document.getElementById("result");
+const letterBox = document.getElementById("letter");
 
-const letterText = `baccha mai efforts kr sakta hu prayer kar sakta hu aur mujhe pata hai kahi na kahi you still love a part of me.
+const scanTexts = [
+  "Reading heartbeat… ❤️",
+  "Decoding emotions…",
+  "Scanning memories…",
+  "Searching soulmate…",
+  "Perfect match detected…"
+];
 
-trust me mera baccha bas ek baar aa jao... I'm really sorry yrr baacha par ek baar give love a chance there will be many reasons
-to choose someone else over me baby but please choose me yrr jaan i promise aane wale 50 yrs will be best for us.
+let i = 0;
 
-tum mere prathna ka vardan bano aur tumko paa kar mai ek aacha insaan ban jau.
+const scanInterval = setInterval(() => {
+  status.innerText = scanTexts[i];
+  i++;
+  if(i === scanTexts.length){
+    clearInterval(scanInterval);
+    setTimeout(showResult, 1200);
+  }
+}, 900);
 
-I miss you baccha aa jao hui hui krke....will you be my little Valentine, butkun bacha? 💐
-
-— Yours always, bebu doll orange cat ❤️`;
-
-function toggleMusic() {
-  const m = document.getElementById('bgMusic');
-  musicOn ? m.pause() : m.play();
-  musicOn = !musicOn;
+function showResult(){
+  status.innerText = "Scan complete ❤️";
+  document.querySelector(".scan-line").style.display="none";
+  result.style.display="block";
+  setTimeout(showLetter, 1800);
 }
 
-function checkPassword() {
-  const input = document.getElementById('password').value;
-  if (input.toLowerCase() === PASSWORD) {
-    lock.classList.add('hidden');
-    intro.classList.remove('hidden');
-  } else {
-    error.innerText = "Wrong word… but love is close 💔";
+const letterText = `
+Dear Awantika,
+
+yeh jo Rose Day ka phool hota hai na,
+yeh sirf ek bahana hota hai…
+
+warna sach toh yeh hai,
+tumhari ek muskurahat
+hazaar gulabon se zyada khoobsurat lagti hai 🌹
+
+tumhara naam dil par likha hai,
+kisi temporary ink se nahi,
+woh jo waqt bhi mita na sake…
+
+agar mohabbat ek ehsaas hai,
+toh woh tum ho,
+aur agar dua ka chehra hota,
+toh us par sirf tumhara hi naam hota.
+
+— Aman ❤️
+`;
+
+let char = 0;
+
+function showLetter(){
+  result.style.display="none";
+  letterBox.style.display="block";
+  letterBox.innerHTML="";
+  char = 0;
+  type();
+}
+
+function type(){
+  if(char < letterText.length){
+    letterBox.innerHTML +=
+      letterText.charAt(char) === "\n"
+      ? "<br>"
+      : letterText.charAt(char);
+    char++;
+    setTimeout(type, 40);
   }
 }
 
-function startQuiz() {
-  hideAll();
-  q1.classList.remove('hidden');
-}
-
-function next(id) {
-  hideAll();
-  document.getElementById(id).classList.remove('hidden');
-  if (id === "final") typeWriter();
-}
-
-function hideAll() {
-  document.querySelectorAll('#intro,#q1,#q2,#q3,#final')
-    .forEach(el => el.classList.add('hidden'));
-}
-
-function typeWriter() {
-  const el = document.getElementById("letter");
-  const btn = document.getElementById("revealBtn");
-  el.innerHTML = "";
-  btn.classList.add("hidden");
-  let i = 0;
-
-  function write() {
-    if (i < letterText.length) {
-      el.innerHTML += letterText.charAt(i) === "\n" ? "<br><br>" : letterText.charAt(i);
-      i++;
-      setTimeout(write, 35);
-    } else {
-      btn.classList.remove("hidden");
-    }
-  }
-  write();
-}
-
-function revealPhoto() {
-  photoBox.classList.add("show");
-}
-
-function createHearts() {
-  const heart = document.createElement('div');
-  heart.className = 'heart';
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.animationDuration = (5 + Math.random() * 5) + 's';
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 8000);
-}
-setInterval(createHearts, 500);
+// floating hearts
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerText="❤️";
+  h.style.left=Math.random()*100+"%";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
+},600);
 </script>
 
 </body>
